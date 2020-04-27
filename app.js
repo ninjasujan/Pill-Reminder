@@ -4,6 +4,10 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+/* middleware */
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 /* Importing all routes */
 const authRoute = require('./routes/auth');
 
@@ -22,8 +26,9 @@ app.use(authRoute);
 mongoose
   .connect(process.env.DATABASE)
   .then((res) => {
-    app.listen(port, () => {
-      console.log('server is running');
+    console.log('DB CONNECTED');
+    app.listen(process.env.PORT, () => {
+      console.log('SERVER RUNNING.');
     });
   })
   .catch((err) => {
