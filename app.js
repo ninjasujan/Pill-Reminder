@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const 
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 /* Importing all routes */
 const authRoute = require('./routes/auth');
@@ -18,7 +19,13 @@ app.use(authRoute);
 
 /* MongoDB connection */
 
-const port = 3000;
-app.listen(port, () => {
-  console.log('server is running');
-});
+mongoose
+  .connect(process.env.DATABASE)
+  .then((res) => {
+    app.listen(port, () => {
+      console.log('server is running');
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
