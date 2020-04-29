@@ -88,75 +88,9 @@ nav {
   font-weight: 600;
 }
 
-/* Styling login section */
-
-section.login {
-  width: 330px;
-  margin: 60px auto;
-  text-align: center;
-}
-
-section.login h2 {
-  margin: 0;
-}
-
-form input[type='email'],
-form input[type='password'] {
-  display: block;
-  width: 90%;
-  padding: 9px 10px;
-  margin: 20px auto;
-  outline: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-sizing: border-box;
-}
-
-form input[type='email']:focus,
-form input[type='password']:focus {
-  border: 2px solid #25ccf7;
-}
-
-form input[type='submit'] {
-  width: 90%;
-  padding: 9px 10px;
-  background-color: #6f42c1;
-  color: #fff;
-  outline: none;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-form input[type='submit']:hover {
-  background-color: #6f42ef;
-}
-
-/* styling error message */
-
-.error {
-  margin-top: 20px;
-  font-size: 1.3em;
-  color: red;
-  font-weight: bold;
-}
-
-::-webkit-input-placeholder {
-  font-weight: bold;
-  font-size: 1.2em;
-}
-
 /* Tablet  degign */
 
 @media screen and (min-width: 500px) {
-  section.login {
-    width: 80%;
-  }
-  form input[type='email'],
-  form input[type='password'],
-  form input[type='submit'] {
-    width: 90%;
-  }
   .auth-menu li {
     display: inline-block;
     padding: 0 10px;
@@ -175,14 +109,6 @@ form input[type='submit']:hover {
 }
 
 @media screen and (min-width: 700px) {
-  section.login {
-    width: 60%;
-  }
-  form input[type='email'],
-  form input[type='password'],
-  form input[type='submit'] {
-    width: 70%px;
-  }
   .sub-menu {
     order: 1;
     width: auto;
@@ -195,15 +121,5 @@ form input[type='submit']:hover {
   .nav-toggle {
     order: 3;
     display: none;
-  }
-  @media screen and (min-width: 960px) {
-    section.login {
-      width: 50%;
-    }
-    form input[type='email'],
-    form input[type='password'],
-    form input[type='submit'] {
-      width: 80%;
-    }
   }
 }

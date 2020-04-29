@@ -37,6 +37,7 @@ app.use(bodyParser.json());
 
 /* Importing all routes */
 const authRoute = require('./routes/auth');
+const patientRoute = require('./routes/patient');
 
 /* setup template engine */
 app.set('view engine', 'ejs');
@@ -47,6 +48,7 @@ app.use(express.static(__dirname + '/public'));
 
 /* Use routes */
 app.use(authRoute);
+app.use(patientRoute);
 
 /* MongoDB connection */
 

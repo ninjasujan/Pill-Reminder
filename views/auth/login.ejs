@@ -1,5 +1,5 @@
     <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/login/login.css">
 </head>
   <body>
     <%- include('../includes/nav.ejs') %>
@@ -7,7 +7,7 @@
     <section class="login">
         <h2>Please Login to Services</h2>
         <div class="error-box">
-          <p class="error">Error occured</p>
+          <p class="error"></p>
         </div>
         <form class="login-form" action="/login" method="POST" novalidate>
             <input type="email" name="email" id="email" placeholder="Your Username...">

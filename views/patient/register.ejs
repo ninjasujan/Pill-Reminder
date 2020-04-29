@@ -1,0 +1,40 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="css/patient/register.css">
+    <body>
+        <%- include('../includes/nav.ejs') %>
+        <section class="wrapper">
+            <h3>New Patient Register</h3>
+            <div class="patient-info">
+                <form>
+                    <input type="text" name="id" id="id" placeholder="Enter Patient ID">
+                    <input type="text" name="name" id="name" placeholder="Patient Name">
+                    <input type="text" name="location" id="location" placeholder="Location">
+                    <input type="number" name="contact" id="contact" placeholder="Contact number">
+                    <div>
+                        <label for="">Address(optional)</label>
+                        <textarea name="address" id="address" rows="3"></textarea>
+                    </div>
+            </div>
+                    <div class="medicin-list">
+                        <p class="banner">Add Medicin List</p>
+                        <input type="text" name="drug-name" id="drug-name" placeholder="Enter Drug Name">
+                        <input type="number" name="days" id="days" placeholder="No.Of Days">
+                        <div class="time">
+                            <div class="list">
+                                <input type="checkbox" name="morning" id="morning" value="morning">
+                                <label for="morning">Morning</label>
+                            </div>
+                        <div class="list">
+                            <input type="checkbox" name="afternoon" id="afternoon" value="afternoon">
+                            <label for="afternoon">afternoon</label>
+                        </div>
+                        <div class="list"> 
+                            <input type="checkbox" name="night" id="night" value="night">
+                            <label for="night">night</label>
+                        </div>
+                        <button>ADD TO LIST</button>
+                    </div>
+                </form>
+        </section>
+    </body>
+</html>
