@@ -3,15 +3,17 @@
 </head>
   <body>
     <%- include('../includes/nav.ejs') %>
-    
+
     <section class="login">
         <h2>Please Login to Services</h2>
-        <form class="login-form">
+        <div class="error-box">
+          <p class="error">Error occured</p>
+        </div>
+        <form class="login-form" action="/login" method="POST" novalidate>
             <input type="email" name="email" id="email" placeholder="Your Username...">
             <input type="password" name="password" id="password" placeholder="Password...">
             <input type="submit" value="Submit" class="btn">
         </form>
-        <p class="error"></p>
     </section>
     <script src="js/form-validation.js"></script>
   </body>

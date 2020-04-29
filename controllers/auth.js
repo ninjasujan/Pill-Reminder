@@ -1,17 +1,43 @@
 const User = require('../models/user');
 
 exports.getLogin = (req, res, next) => {
-  res.render('login/login');
+  res.render('auth/login', {
+    pageTitle: 'Login',
+    path: '/login',
+    oldInput: null,
+    error: {
+      status: false,
+      errorMessage: null,
+    },
+    isLoggedIn: false,
+  });
 };
 
 exports.postLogin = (req, res, next) => {
-  User.findOne(req.body)
+  console.log('request body', req.body);
+  User.findOne({ username: req.body.username, password: req.body.password })
     .then((user) => {
+      console.log('user', user);
       if (!user) {
-        console.log('Invalid user');
+        console.log('Invalid login');
+        return res.json({
+          error: {
+            status: true,
+            errorMessage: 'Invalid login credentials',
+          },
+        });
       }
-      console.log('Login successfull');
-      res.end();
+      req.session.isLoggedIn = true;
+      req.session.user = user;
+      return req.session.save((err) => {
+        console.log('[error]', err);
+        return res.json({
+          error: {
+            status: false,
+            error: null,
+          },
+        });
+      });
     })
     .catch((err) => {
       console.log(err);

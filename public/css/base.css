@@ -12,3 +12,8 @@ a {
 li {
   list-style-type: none;
 }
+
+nav ul li a.active {
+  color: #f3b431;
+  font-weight: bold;
+}
