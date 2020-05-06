@@ -17,3 +17,14 @@ nav ul li a.active {
   color: #f3b431;
   font-weight: bold;
 }
+
+.error {
+  margin-top: 20px;
+  font-size: 1.3em;
+  color: red;
+  font-weight: bold;
+}
+
+.hide {
+  display: none;
+}

@@ -49,3 +49,16 @@ exports.logout = (req, res, next) => {
     res.redirect('/login');
   });
 };
+
+exports.getSignup = (req, res, next) => {
+  return res.render('auth/signup', {
+    pageTitle: 'Login',
+    path: '/login',
+    oldInput: null,
+    error: {
+      status: false,
+      errorMessage: null,
+    },
+    isLoggedIn: false,
+  });
+};

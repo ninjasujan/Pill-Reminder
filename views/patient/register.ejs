@@ -5,7 +5,7 @@
         <section class="wrapper">
             <h3>New Patient Register</h3>
             <div class="patient-info">
-                <form>
+                <form class="register">
                     <input type="text" name="id" id="id" placeholder="Enter Patient ID">
                     <input type="text" name="name" id="name" placeholder="Patient Name">
                     <input type="text" name="location" id="location" placeholder="Location">
@@ -17,8 +17,8 @@
             </div>
                     <div class="medicin-list">
                         <p class="banner">Add Medicin List</p>
-                        <input type="text" name="drug-name" id="drug-name" placeholder="Enter Drug Name">
-                        <input type="number" name="days" id="days" placeholder="No.Of Days">
+                        <input type="text" name="drugname" id="drug-name" placeholder="Enter Drug Name">
+                        <input type="number" name="days" step="1" pattern="[0-9]" onkeypress="return !(event.charCode == 46)"  id="days" placeholder="No.Of Days">
                         <div class="time">
                             <div class="list">
                                 <input type="checkbox" name="morning" id="morning" value="morning">
@@ -32,8 +32,28 @@
                             <input type="checkbox" name="night" id="night" value="night">
                             <label for="night">night</label>
                         </div>
-                        <button>ADD TO LIST</button>
+                        <p class="error"></p>
+                        <button id="add-list">ADD TO LIST</button>
                     </div>
                 </form>
         </section>
+        <section class="table-list">
+            <table>
+                <!-- <caption>Medicin - Collection</caption> -->
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Time</td>
+                        <td>Cancel</td>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    
+                </tbody>
+            </table>
+            <button class="submit">Register</button>
+        </section>
+        <script src="js/add-drug.js"></script>
 <%- include('../includes/footer.ejs') %>
+

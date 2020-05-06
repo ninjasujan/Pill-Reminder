@@ -1,0 +1,20 @@
+
+    <%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="css/login/login.css">
+</head>
+<body>
+    <section class="login">
+        <h2>Sign-Up</h2>
+        <div class="error-box">
+          <p class="error"></p>
+        </div>
+        <form class="login-form" action="/login" method="POST" novalidate>
+            <input type="email" name="email" id="email" placeholder="Your Username...">
+            <input type="password" name="password" id="password" placeholder="Password...">
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password...">
+            <input type="submit" value="Submit" class="btn">
+        </form>
+    </section>
+</body>
+<script src="js/form-validation.js"></script>
+<%- include('../includes/footer.ejs') %>
