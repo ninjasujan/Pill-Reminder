@@ -20,11 +20,7 @@ nav ul li a.active {
 
 .error {
   margin-top: 20px;
-  font-size: 1.3em;
+  font-size: 0.9em;
   color: red;
   font-weight: bold;
-}
-
-.hide {
-  display: none;
 }

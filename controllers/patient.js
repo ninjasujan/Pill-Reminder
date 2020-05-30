@@ -9,3 +9,5 @@ exports.getRegister = (req, res, next) => {
     },
   });
 };
+
+exports.postRegister = (req, res, next) => {};

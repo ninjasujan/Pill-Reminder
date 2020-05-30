@@ -1,5 +1,6 @@
 const addToList = document.querySelector('#add-list');
 let medicinList = [];
+let person = {};
 const registerForm = document.querySelector('.register');
 const drugInput = registerForm.drugname;
 const daysInput = registerForm.days;
@@ -28,7 +29,11 @@ const validateInput = (drugName, days, shedule) => {
 };
 
 const clearInput = () => {
-  registerForm.reset();
+  registerForm.drugname.value = '';
+  registerForm.days.value = '';
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 };
 
 addToList.addEventListener('click', (e) => {
@@ -62,7 +67,7 @@ addToList.addEventListener('click', (e) => {
   }
 });
 
-function deleteMedicin(e) {
+function deleteMedicine(e) {
   const drugRow = e.target.parentElement.parentElement;
   const id = drugRow.querySelector('td').innerText;
   console.log('medicin ID to delete', id);
@@ -96,9 +101,11 @@ const drawTable = (medicinList) => {
             <td>${medicin.id}</td>
             <td>${medicin.drugName}</td>
             <td ">${time.join(', ')}</td>
-            <td><button class="delete" onclick="deleteMedicin(event);">Delete</button></td>
+            <td><button class="delete" onclick="deleteMedicine(event);">Delete</button></td>
         </tr>
       `;
   }
   tableBodyStructure.innerHTML = tableBody;
 };
+
+submit.addEventListener('click', (e) => {});

@@ -11,7 +11,8 @@ section.login h2 {
 }
 
 form input[type='email'],
-form input[type='password'] {
+form input[type='password'],
+form input[type='text'] {
   display: block;
   width: 90%;
   padding: 9px 10px;
@@ -23,7 +24,8 @@ form input[type='password'] {
 }
 
 form input[type='email']:focus,
-form input[type='password']:focus {
+form input[type='password']:focus,
+form input[type='text']:focus {
   border: 2px solid #6f42c1;
 }
 
@@ -42,15 +44,6 @@ form input[type='submit']:hover {
   background-color: #6f42ef;
 }
 
-/* styling error message */
-
-.error {
-  margin-top: 20px;
-  font-size: 1.3em;
-  color: red;
-  font-weight: bold;
-}
-
 /* ::-webkit-input-placeholder {
   font-weight: bold;
   font-size: 1.2em;
@@ -64,7 +57,8 @@ form input[type='submit']:hover {
   }
   form input[type='email'],
   form input[type='password'],
-  form input[type='submit'] {
+  form input[type='submit'],
+  form input[type='text'] {
     width: 90%;
   }
 }
@@ -75,7 +69,8 @@ form input[type='submit']:hover {
   }
   form input[type='email'],
   form input[type='password'],
-  form input[type='submit'] {
+  form input[type='submit'],
+  form input[type='text'] {
     width: 70%px;
   }
 }
@@ -86,7 +81,8 @@ form input[type='submit']:hover {
   }
   form input[type='email'],
   form input[type='password'],
-  form input[type='submit'] {
+  form input[type='submit'],
+  form input[type='text'] {
     width: 80%;
   }
 }

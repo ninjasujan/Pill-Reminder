@@ -8,6 +8,9 @@ const bodyParser = require('body-parser');
 // require mongoose
 const mongoose = require('mongoose');
 
+/* importing models */
+const User = require('./models/user');
+
 // mongoDB session
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
@@ -46,9 +49,39 @@ app.set('views', 'views');
 /* setup middleware */
 app.use(express.static(__dirname + '/public'));
 
+/* Middleware */
+app.use((req, res, next) => {
+  if (!req.session.user) {
+    return next();
+  }
+  User.findById(req.session.user._id)
+    .then((user) => {
+      if (!user) {
+        return next();
+      }
+      req.user = user;
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 /* Use routes */
 app.use(authRoute);
 app.use(patientRoute);
+app.use((req, res, next) => {
+  res.render('error/404.ejs', {
+    pageTitle: 'SignUp',
+    path: '/signup',
+    oldInput: null,
+    error: {
+      status: false,
+      errorMessage: null,
+    },
+    isLoggedIn: req.session.isLoggedIn,
+  });
+});
 
 /* MongoDB connection */
 
