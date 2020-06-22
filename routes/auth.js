@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
-const { isAdmin, isAuth } = require("../middleware/isAuth");
+const { isAdmin, isAuth, isSuperAdmin } = require("../middleware/isAuth");
 
 /* importing all functions of controller */
 const {
@@ -73,7 +73,7 @@ router.post(
   postSignup
 );
 
-router.get("/create-user", isAuth, isAdmin, getCreateUser);
+router.get("/create-user", isAuth, isSuperAdmin, getCreateUser);
 
 router.post(
   "/create-user",
@@ -112,7 +112,6 @@ router.post(
       }),
   ],
   isAuth,
-  isAdmin,
   postCreateUser
 );
 

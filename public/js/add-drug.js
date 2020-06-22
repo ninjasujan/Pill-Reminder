@@ -21,11 +21,11 @@ const resetForm = () => {
 };
 
 const clearInput = () => {
-  // registerForm.drugname.value = "";
-  // registerForm.days.value = "";
-  // checkboxes.forEach((checkbox) => {
-  //   checkbox.checked = false;
-  // });
+  registerForm.drugname.value = "";
+  registerForm.days.value = "";
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
 };
 
 const validateMedicineInput = (drugName, days, shedule) => {
