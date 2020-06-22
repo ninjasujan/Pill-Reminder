@@ -1,5 +1,5 @@
-const loginForm = document.querySelector('.login-form');
-const error = document.querySelector('.error');
+const loginForm = document.querySelector(".login-form");
+const error = document.querySelector(".error");
 
 const validateInput = (username, password) => {
   const emailPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/;
@@ -16,17 +16,17 @@ const validateInput = (username, password) => {
   return true;
 };
 
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const loginFields = {
     username: loginForm.email.value,
     password: loginForm.password.value,
   };
   if (validateInput(loginForm.email.value, loginForm.password.value)) {
-    fetch('/login', {
-      method: 'post',
+    fetch("/login", {
+      method: "post",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(loginFields),
     })
@@ -38,11 +38,11 @@ loginForm.addEventListener('submit', (e) => {
         if (data.error.status == true) {
           error.innerHTML = data.error.errorMessage;
         } else {
-          location.replace('/register');
+          location.replace("/register");
         }
       })
       .catch((err) => {
-        console.log('[Frnt-end]', err);
+        console.log("[Front-end]", err);
       });
   }
 });
