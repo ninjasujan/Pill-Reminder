@@ -1,13 +1,13 @@
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
-const User = require('../models/user');
-const UserKey = require('../models/UserKey');
+const User = require("../models/user");
+const UserKey = require("../models/UserKey");
 
 exports.getLogin = (req, res, next) => {
-  res.render('auth/login', {
-    pageTitle: 'Login',
-    path: '/login',
+  res.render("auth/login", {
+    pageTitle: "Login",
+    path: "/login",
     oldInput: null,
     error: {
       status: false,
@@ -23,24 +23,24 @@ exports.postLogin = (req, res, next) => {
     .then((user) => {
       requestedUser = user;
       if (!requestedUser) {
-        console.log('User not found.!');
+        console.log("User not found.!");
         return res.json({
           error: {
             status: true,
-            errorMessage: 'Invalid login credentials',
+            errorMessage: "Invalid login credentials",
           },
         });
       }
       bcrypt
         .compare(req.body.password, requestedUser.password)
         .then((doMatch) => {
-          console.log('Password matched', doMatch);
+          console.log("Password matched", doMatch);
           if (!doMatch) {
-            console.log('Password not matched..');
+            console.log("Password not matched..");
             return res.json({
               error: {
                 status: true,
-                errorMessage: 'Invalid login credentials',
+                errorMessage: "Invalid login credentials",
               },
             });
           }
@@ -63,14 +63,14 @@ exports.postLogin = (req, res, next) => {
 
 exports.logout = (req, res, next) => {
   return req.session.destroy((err) => {
-    res.redirect('/login');
+    res.redirect("/login");
   });
 };
 
 exports.getSignup = (req, res, next) => {
-  return res.render('auth/signup', {
-    pageTitle: 'SignUp',
-    path: '/signup',
+  return res.render("auth/signup", {
+    pageTitle: "SignUp",
+    path: "/signup",
     oldInput: null,
     error: {
       status: false,
@@ -82,11 +82,11 @@ exports.getSignup = (req, res, next) => {
 
 exports.postSignup = (req, res, next) => {
   const errors = validationResult(req);
-  console.log('Form errors: ', errors.array());
+  console.log("Form errors: ", errors.array());
   if (!errors.isEmpty()) {
-    return res.render('auth/signup', {
-      pageTitle: 'signup',
-      path: '/signup',
+    return res.render("auth/signup", {
+      pageTitle: "signup",
+      path: "/signup",
       oldInput: {
         username: req.body.username,
         password: req.body.password,
@@ -104,9 +104,9 @@ exports.postSignup = (req, res, next) => {
   UserKey.findOne({})
     .then((oneTimeKey) => {
       if (oneTimeKey.key.toString() !== req.body.key.toString()) {
-        return res.render('auth/signup', {
-          pageTitle: 'signup',
-          path: '/signup',
+        return res.render("auth/signup", {
+          pageTitle: "signup",
+          path: "/signup",
           oldInput: {
             username: req.body.username,
             password: req.body.password,
@@ -115,7 +115,7 @@ exports.postSignup = (req, res, next) => {
           },
           error: {
             status: true,
-            errorMessage: 'One Time key is not authorized.!',
+            errorMessage: "One Time key is not authorized.!",
           },
           isLoggedIn: req.session.isLoggedIn,
         });
@@ -131,7 +131,7 @@ exports.postSignup = (req, res, next) => {
       return user.save();
     })
     .then((user) => {
-      return res.redirect('/login');
+      return res.redirect("/login");
     })
     .catch((err) => {
       console.log(err);
@@ -139,9 +139,9 @@ exports.postSignup = (req, res, next) => {
 };
 
 exports.getCreateUser = (req, res, next) => {
-  res.render('auth/create-user', {
-    pageTitle: 'signup',
-    path: '/signup',
+  res.render("auth/create-user", {
+    pageTitle: "signup",
+    path: "/signup",
     oldInput: {
       username: req.body.username,
       password: req.body.password,
@@ -157,11 +157,12 @@ exports.getCreateUser = (req, res, next) => {
 };
 
 exports.postCreateUser = (req, res, next) => {
+  console.log("[Auth.js]", req.body);
   let errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.render('auth/create-user', {
-      pageTitle: 'create-user',
-      path: '/create-user',
+    return res.render("auth/create-user", {
+      pageTitle: "create-user",
+      path: "/create-user",
       oldInput: {
         username: req.body.username,
         password: req.body.password,
@@ -174,10 +175,32 @@ exports.postCreateUser = (req, res, next) => {
       isLoggedIn: req.session.isLoggedIn,
     });
   }
+  User.findOne({ username: req.body.username })
+    .then((user) => {
+      if (user) {
+        return res.render("auth/signup", {
+          pageTitle: "create-user",
+          path: "/create-user",
+          oldInput: {
+            username: req.body.username,
+            password: req.body.password,
+            confirmPassword: req.body.confirmPassword,
+          },
+          error: {
+            status: true,
+            errorMessage: "The user already exist with this same username.!",
+          },
+          isLoggedIn: req.session.isLoggedIn,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   bcrypt
     .hash(req.body.password, 12)
     .then((hashedPassword) => {
-      console.log('Password hashed');
+      console.log("Password hashed");
       const user = new User({
         username: req.body.username,
         password: hashedPassword,
@@ -186,8 +209,8 @@ exports.postCreateUser = (req, res, next) => {
       return user.save();
     })
     .then((user) => {
-      console.log('Sucessful registered user');
-      res.redirect('/login');
+      console.log("Sucessful registered user");
+      res.redirect("/create-user");
     })
     .catch((err) => {
       console.log(err);

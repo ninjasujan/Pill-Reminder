@@ -15,7 +15,15 @@ registerForm.addEventListener('submit', (e) => {
   e.preventDefault();
 });
 
-const validateInput = (drugName, days, shedule) => {
+const clearInput = () => {
+  registerForm.drugname.value = '';
+  registerForm.days.value = '';
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
+};
+
+const validateMedicineInput = (drugName, days, shedule) => {
   if (drugName === '') return "Drug name shouldn't be empty";
   if (days == 0) return 'Invalid days';
   if (
@@ -23,17 +31,26 @@ const validateInput = (drugName, days, shedule) => {
     shedule.afternoon == false &&
     shedule.night == false
   ) {
-    return 'Please suggest timing of the medicin';
+    return 'Please suggest timing of the medicine';
   }
   return 'success';
 };
 
-const clearInput = () => {
-  registerForm.drugname.value = '';
-  registerForm.days.value = '';
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-  });
+const validatePersonInput = (id, name, contact, location) => {
+  const person_error = document.querySelector('#person-error');
+  if (id == '') {
+    person_error.innerHTML = `ID field should not be empty.!`;
+    return false;
+  }
+  if (name == '' || /^[a-zA-Z ]{2, }$/.test(name)) {
+    person_error.innerHTML = 'Please enter valid name..';
+    return false;
+  }
+  if (contact.length !== 10) {
+    person_error.innerHTML = 'Please enter valid Phone number';
+    return false;
+  }
+  return true;
 };
 
 addToList.addEventListener('click', (e) => {
@@ -46,16 +63,15 @@ addToList.addEventListener('click', (e) => {
       shedule[time.value] = true;
     }
   });
-  let msg = validateInput(drugName, days, shedule);
+  let msg = validateMedicineInput(drugName, days, shedule);
   if (msg !== 'success') {
     error.innerHTML = msg;
   } else {
     error.innerHTML = '';
     medicinList.push({
-      id: id,
-      drugName: drugName,
+      name: drugName,
       days: days,
-      shedule: {
+      schedule: {
         morning: shedule.morning,
         afternoon: shedule.afternoon,
         night: shedule.night,
@@ -93,9 +109,9 @@ const drawTable = (medicinList) => {
   const time = [];
   for (let medicin of medicinList) {
     const time = [];
-    if (medicin.shedule.morning == true) time.push('Morning');
-    if (medicin.shedule.afternoon == true) time.push('Afternoon');
-    if (medicin.shedule.night == true) time.push('Night');
+    if (medicin.schedule.morning == true) time.push('Morning');
+    if (medicin.schedule.afternoon == true) time.push('Afternoon');
+    if (medicin.schedule.night == true) time.push('Night');
     tableBody += `
         <tr>
             <td>${medicin.id}</td>
@@ -108,4 +124,36 @@ const drawTable = (medicinList) => {
   tableBodyStructure.innerHTML = tableBody;
 };
 
-submit.addEventListener('click', (e) => {});
+submit.addEventListener('click', (e) => {
+  console.log('Register action initiated.!');
+  const id = registerForm.id.value;
+  const name = registerForm.name.value;
+  const contact = registerForm.contact.value;
+  const location = registerForm.location.value;
+  console.log(id, name, contact, location);
+  if (validatePersonInput(id, name, contact, location)) {
+    const patientInfo = {
+      id: id,
+      name: name,
+      contact: contact,
+      location: location,
+      medicine: medicinList,
+    };
+    console.log('Making server request to the database', patientInfo);
+    fetch('/post-register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(patientInfo),
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    console.log('Error in fileds.!');
+  }
+});

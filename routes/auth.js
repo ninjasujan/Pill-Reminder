@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { body } = require('express-validator');
-const { isAdmin, isAuth } = require('../middleware/isAuth');
+const { body } = require("express-validator");
+const { isAdmin, isAuth } = require("../middleware/isAuth");
 
 /* importing all functions of controller */
 const {
@@ -12,87 +12,100 @@ const {
   postSignup,
   getCreateUser,
   postCreateUser,
-} = require('../controllers/auth');
+} = require("../controllers/auth");
 
-router.get('/login', getLogin);
-
-router.post('/login', postLogin);
-
-router.get('/logout', logout);
-
-router.get('/signup', getSignup);
+router.get("/login", getLogin);
 
 router.post(
-  '/signup',
+  "/login",
   [
-    body('username')
+    body("username").custom((username, { req }) => {
+      req.body.username = username.toLowerCase();
+      return true;
+    }),
+  ],
+  postLogin
+);
+
+router.get("/logout", logout);
+
+router.get("/signup", getSignup);
+
+router.post(
+  "/signup",
+  [
+    body("username")
       .not()
       .isEmpty()
-      .withMessage('User Name should not be empty')
+      .withMessage("User Name should not be empty")
       .isLength({ min: 8 })
-      .withMessage('User Name must be at least 8 Character in length'),
-    body('password')
+      .withMessage("User Name must be at least 8 Character in length")
+      .custom((username, { req }) => {
+        req.body.username = username.toLowerCase();
+        return true;
+      }),
+    body("password")
       .not()
       .isEmpty()
-      .withMessage('Password should not be empty')
+      .withMessage("Password should not be empty")
       .isLength({ min: 6 })
-      .withMessage('Password must be atleast 6 character long.!')
+      .withMessage("Password must be atleast 6 character long.!")
       .matches(/\d/)
-      .withMessage('Password must contain at least one digit.!')
-      .isAlphanumeric()
-      .withMessage(
-        'Only alphanumeric characters are allowed including @, *, &.!'
-      )
+      .withMessage("Password must contain at least one digit.!")
       .trim(),
-    body('confirmPassword')
+    body("confirmPassword")
       .not()
       .isEmpty()
-      .withMessage('Confirm password should not be empty.!')
+      .withMessage("Confirm password should not be empty.!")
       .custom((password, { req }) => {
         if (password != req.body.password) {
           return Promise.reject(
-            'Password should match with confirm Password.!'
+            "Password should match with confirm Password.!"
           );
         }
         return true;
       }),
-    body('key').not().isEmpty().withMessage('Key field is empty.!'),
+    body("key")
+      .not()
+      .isEmpty()
+      .withMessage("Key field is required to sign in as super admin.!"),
   ],
   postSignup
 );
 
-router.get('/create-user', isAuth, isAdmin, getCreateUser);
+router.get("/create-user", isAuth, isAdmin, getCreateUser);
 
 router.post(
-  '/create-user',
+  "/create-user",
   [
-    body('username')
+    body("username")
       .not()
       .isEmpty()
-      .withMessage('User Name should not be empty')
+      .withMessage("User Name should not be empty.!")
       .isLength({ min: 8 })
-      .withMessage('User Name must be at least 8 Character in length'),
-    body('password')
+      .withMessage("User Name must be at least 8 Character in length")
+      .custom((username, { req }) => {
+        req.body.username = username.toLowerCase();
+        console.log("[Auth.js]", req.body);
+        return true;
+      }),
+    body("password")
       .not()
       .isEmpty()
-      .withMessage('Password should not be empty')
+      .withMessage("Password should not be empty")
       .isLength({ min: 6 })
-      .withMessage('Password must be atleast 6 character long.!')
+      .withMessage("Password must be atleast 6 character long.!")
       .matches(/\d/)
-      .withMessage('Password must contain at least one digit.!')
-      .isAlphanumeric()
-      .withMessage(
-        'Only alphanumeric characters are allowed including @, *, &.!'
-      )
+      .withMessage("Password must contain at least one digit.!")
       .trim(),
-    body('confirmPassword')
+    body("confirmPassword")
       .not()
       .isEmpty()
-      .withMessage('Confirm password should not be empty.!')
+      .withMessage("Confirm password should not be empty.!")
       .custom((password, { req }) => {
         if (password != req.body.password) {
           return Promise.reject(
-            'Password should match with confirm Password.!'
+            "Password should match with confirm Password.!"
           );
         }
         return true;
