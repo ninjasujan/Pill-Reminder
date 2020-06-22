@@ -1,0 +1,42 @@
+<nav>
+  <ul class="menu">
+    <div class="logo-box">
+      <li class="logo">
+        <a href="/"><img src="assets/time.png" /></a>
+      </li>
+    </div>
+    <div class="container sub-menu">
+      <li>
+        <a href="/register" class="<%= path === '/register' ? 'active' : '' %>"
+          >Register</a
+        >
+      </li>
+      <li>
+        <a href="#" class="<%= path === '/update' ? 'active' : '' %>">Update</a>
+      </li>
+      <li>
+        <a href="#" class="<%= path === '/time-set' ? 'active' : '' %>"
+          >Time-Set</a
+        >
+      </li>
+    </div>
+    <div class="container auth-menu">
+      <% if(!isLoggedIn) { %>
+      <li>
+        <a href="/login" class="<%= path === '/login' ? 'active' : '' %>"
+          >Login</a
+        >
+      </li>
+      <% } else { %>
+      <li>
+        <a href="/logout" class="<%= path === '/logout' ? 'active' : '' %>"
+          >Logout</a
+        >
+      </li>
+      <% } %>
+    </div>
+    <div class="nav-toggle">
+      <li class="toggle"><span class="bars"></span></li>
+    </div>
+  </ul>
+</nav>

@@ -1,0 +1,125 @@
+/* styling nav bar */
+
+nav {
+  background-color: #6f42c1;
+  padding: 5px 20px;
+}
+
+/* logo styling */
+
+.logo {
+  height: 60px;
+  width: 60px;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* Toggle button style */
+
+.bars {
+  background-color: #fff;
+  height: 2px;
+  width: 30px;
+  display: inline-block;
+  position: relative;
+}
+
+.bars::before,
+.bars::after {
+  background-color: #fff;
+  height: 2px;
+  width: 30px;
+  display: inline-block;
+  content: '';
+  position: absolute;
+}
+
+.bars::before {
+  top: 8px;
+}
+
+.bars::after {
+  bottom: 8px;
+}
+
+.nav-toggle {
+  cursor: pointer;
+  order: 1;
+}
+
+/* Styling mobile device */
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.sub-menu li,
+.auth li {
+  display: block;
+  padding: 5px 10px;
+}
+
+.container {
+  width: 100%;
+  text-align: center;
+  display: none;
+  order: 2;
+}
+
+.hide {
+  display: block;
+}
+
+.menu li a {
+  display: block;
+  color: #fff;
+}
+
+.menu li a:hover {
+  color: #f3b431;
+  font-weight: 600;
+}
+
+/* Tablet  degign */
+
+@media screen and (min-width: 500px) {
+  .auth-menu li {
+    display: inline-block;
+    padding: 0 10px;
+  }
+  .auth-menu {
+    order: 1;
+    width: auto;
+    display: block;
+  }
+  .nav-toggle {
+    order: 2;
+  }
+  .sub-menu {
+    order: 3;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .sub-menu {
+    order: 1;
+    width: auto;
+    display: block;
+  }
+  .sub-menu li {
+    display: inline-block;
+    padding: 0 10px;
+  }
+  .nav-toggle {
+    order: 3;
+    display: none;
+  }
+}

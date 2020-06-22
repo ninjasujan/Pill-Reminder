@@ -1,0 +1,35 @@
+.error-box {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px;
+}
+
+.error-box h1 {
+  color: #cc0000;
+}
+
+.error-box .box h2 {
+  color: rgba(236, 27, 27, 0.808);
+}
+
+.error-box .content span {
+  color: red;
+}
+
+.error-box .error-img img {
+  width: 80%;
+  height: 300px;
+}
+
+@media screen and (min-width: 600px) {
+  .error-box .error-img img {
+    width: 60%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .error-box .error-img img {
+    width: 40%;
+  }
+}

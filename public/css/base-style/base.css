@@ -1,0 +1,26 @@
+body,
+p,
+ul,
+li,
+a {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+}
+
+li {
+  list-style-type: none;
+}
+
+nav ul li a.active {
+  color: #f3b431;
+  font-weight: bold;
+}
+
+.error {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: red;
+  font-weight: bold;
+}

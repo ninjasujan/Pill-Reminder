@@ -1,0 +1,22 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="css/login/login.css">
+</head>
+<body>
+<%- include('../includes/nav.ejs')  %>
+<section class="login">
+    <h2>Create a new User</h2>
+    <p>Admin activity</p>
+    <form class="login-form" action="/create-user" method="POST" novalidate>
+        <input type="text" name="username" id="email" placeholder="Your Username..." value="<%= oldInput != null ? oldInput.username : '' %>">
+        <input type="password" name="password" id="password" placeholder="Password..." value="<%= oldInput != null ? oldInput.password : '' %>">
+        <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password..." value="<%= oldInput != null ? oldInput.confirmPassword : '' %>">
+        <input type="submit" value="Submit" class="btn">
+    </form>
+    <% if(error.status) { %>
+        <div class="error-box">
+            <p class="error"><%= error.errorMessage %></p>
+        </div>
+    <% } %>
+</section>
+</body>
+<%- include('../includes/footer.ejs') %>

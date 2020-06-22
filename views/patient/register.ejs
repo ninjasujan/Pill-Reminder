@@ -1,0 +1,62 @@
+<%- include('../includes/head.ejs') %>
+    <link rel="stylesheet" href="css/patient/register.css">
+    <body>
+        <%- include('../includes/nav.ejs') %>
+        <section class="wrapper">
+            <h3>New Patient Register</h3>
+            <div class="patient-info">
+                <form class="register">
+                    <input type="text" name="id" id="id" placeholder="Enter Patient ID">
+                    <input type="text" name="name" id="name" placeholder="Patient Name">
+                    <input type="text" name="location" id="location" placeholder="Location">
+                    <input type="number" name="contact" id="contact" placeholder="Contact number">
+                    <div>
+                        <label for="">Address(optional)</label>
+                        <textarea name="address" id="address" rows="3"></textarea>
+                    </div>
+                    <p id="person-error" class="error"></p>
+            </div>
+                    <div class="medicin-list">
+                        <p class="banner">Add Medicin List</p>
+                        <input type="text" name="drugname" id="drug-name" placeholder="Enter Drug Name">
+                        <input type="number" name="days" step="1" pattern="[0-9]" onkeypress="return !(event.charCode == 46)"  id="days" placeholder="No.Of Days">
+                        <div class="time">
+                            <div class="list">
+                                <input type="checkbox" name="morning" id="morning" value="morning">
+                                <label for="morning">Morning</label>
+                            </div>
+                        <div class="list">
+                            <input type="checkbox" name="afternoon" id="afternoon" value="afternoon">
+                            <label for="afternoon">afternoon</label>
+                        </div>
+                        <div class="list"> 
+                            <input type="checkbox" name="night" id="night" value="night">
+                            <label for="night">night</label>
+                        </div>
+                        <p class="error"></p>
+                        <button id="add-list">ADD TO LIST</button>
+                    </div>
+                </form>
+        </section>
+        <section class="table-list">
+            <table>
+                <!-- <caption>Medicin - Collection</caption> -->
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <td>Name</td>
+                        <td>Days</td>
+                        <td>Time</td>
+                        <td>Cancel</td>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    
+                </tbody>
+            </table>
+            <button class="submit">Register</button>
+        </section>
+        <script src="js/add-drug.js"></script>
+        <script src="js/register.js"
+<%- include('../includes/footer.ejs') %>
+
